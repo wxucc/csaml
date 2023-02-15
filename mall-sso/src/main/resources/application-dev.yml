@@ -1,0 +1,30 @@
+my:
+  server:
+    #ucloud 云
+    addr: 106.75.107.221
+    #华为云
+    #addr: 114.116.199.250
+spring:
+  jackson:
+    default-property-inclusion: always
+  datasource:
+    admin:
+      jdbc-url: jdbc:mysql://${my.server.addr}:3306/mall_ams?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      username: root
+      password: tarena2017Up;
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    user:
+      jdbc-url: jdbc:mysql://${my.server.addr}:3306/mall_ums?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      username: root
+      password: tarena2017Up;
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  #redis
+  redis:
+    host: ${my.server.addr}
+    port: 6379
+    password:
+logging:
+  level:
+    cn.tedu.mall: trace

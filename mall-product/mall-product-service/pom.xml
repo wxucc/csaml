@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 模型版本，是固定代码 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 父级项目的参数 -->
+    <parent>
+        <groupId>cn.tedu.mall</groupId>
+        <artifactId>mall-product</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <!-- 当前项目的参数 -->
+    <groupId>cn.tedu.mall</groupId>
+    <artifactId>mall-product-service</artifactId>
+    <version>1.0.0</version>
+    <name>mall-product-service</name>
+    <description>商品管理的业务逻辑层，用于定义各业务接口（并不实现）</description>
+
+    <!-- 依赖项 -->
+    <dependencies>
+        <!-- POJO模块 -->
+        <dependency>
+            <groupId>cn.tedu</groupId>
+            <artifactId>mall-pojo</artifactId>
+        </dependency>
+        <!-- MyBatis Spring Boot：数据访问层MyBatis编程 -->
+        <!-- 添加此依赖是因为业务接口中需要添加@Transcational注解 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.zaxxer</groupId>
+                    <artifactId>HikariCP</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mybatis.spring.boot</groupId>
+                    <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis-spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+</project>

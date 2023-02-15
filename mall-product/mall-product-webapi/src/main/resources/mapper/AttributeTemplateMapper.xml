@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.AttributeTemplateMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id, name, pinyin, keywords, sort
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.AttributeTemplateStandardVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pinyin" property="pinyin"/>
+        <result column="keywords" property="keywords"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <!-- 详情查询字段列表 -->
+    <sql id="DetailsQueryFields">
+        <if test="true">
+            pms_attribute_template.id,
+            pms_attribute_template.name,
+            pms_attribute_template.pinyin,
+            pms_attribute_template.keywords,
+            pms_attribute_template.sort,
+            pms_attribute.id,
+            pms_attribute.name,
+            pms_attribute.description,
+            pms_attribute.type,
+            pms_attribute.input_type,
+            pms_attribute.value_list,
+            pms_attribute.unit,
+            pms_attribute.sort,
+            pms_attribute.is_allow_customize
+        </if>
+    </sql>
+
+    <!-- 详情查询映射结果 -->
+    <resultMap id="DetailsResultMap" type="cn.tedu.mall.pojo.product.vo.AttributeTemplateDetailsVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pinyin" property="pinyin"/>
+        <result column="keywords" property="keywords"/>
+        <result column="sort" property="sort"/>
+        <collection property="attributes" ofType="cn.tedu.mall.pojo.product.vo.AttributeListItemVO">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="description" property="description"/>
+            <result column="input_type" property="inputType"/>
+            <result column="type" property="type"/>
+            <result column="value_list" property="valueList"/>
+            <result column="unit" property="unit"/>
+            <result column="sort" property="sort"/>
+            <result column="is_allow_customize" property="allowCustomize"/>
+        </collection>
+    </resultMap>
+
+    <!-- 列表项查询字段列表 -->
+    <sql id="ListItemQueryFields">
+        <if test="true">
+            pms_attribute_template.id,
+            pms_attribute_template.name
+        </if>
+    </sql>
+
+    <!-- 列表项查询映射结果 -->
+    <resultMap id="ListItemResultMap" type="cn.tedu.mall.pojo.product.vo.AttributeTemplateListItemVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <!-- int insert(AttributeTemplate attributeTemplate); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_attribute_template (name, pinyin, keywords, sort)
+        values (#{name}, #{pinyin}, #{keywords}, #{sort})
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        DELETE
+        FROM pms_attribute_template
+        WHERE id = #{id}
+    </delete>
+
+    <!-- int update(AttributeTemplate attributeTemplate); -->
+    <update id="update">
+        update pms_attribute_template
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="pinyin!=null">
+                pinyin=#{pinyin},
+            </if>
+            <if test="keywords!=null">
+                keywords=#{keywords},
+            </if>
+            <if test="sort!=null">
+                sort=#{sort},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- int countByName(String name); -->
+    <select id="countByName" resultType="int">
+        SELECT count(*)
+        FROM pms_attribute_template
+        WHERE name = #{name}
+    </select>
+
+    <!-- AttributeTemplateVO getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        SELECT
+        <include refid="StandardQueryFields"/>
+        FROM pms_attribute_template
+        WHERE id=#{id}
+    </select>
+
+    <!-- AttributeTemplateStandardVO getByName(String name); -->
+    <select id="getByName" resultMap="StandardResultMap">
+        SELECT
+        <include refid="StandardQueryFields"/>
+        FROM pms_attribute_template
+        WHERE name=#{name}
+    </select>
+
+    <!-- AttributeTemplateDetailsVO getDetailsById(Long id); -->
+    <select id="getDetailsById" resultMap="DetailsResultMap">
+        SELECT
+        <include refid="DetailsQueryFields"/>
+        FROM
+        pms_attribute_template
+        LEFT JOIN
+        pms_attribute
+        ON
+        pms_attribute_template.id=pms_attribute.template_id
+        WHERE
+        pms_attribute_template.id=#{id}
+    </select>
+
+    <!-- AttributeTemplateDetailsVO getDetailsByIdAndAttributeType(@Param("id") Long id, @Param("attributeType") Integer attributeType); -->
+    <select id="getDetailsByIdAndAttributeType" resultMap="DetailsResultMap">
+        SELECT
+        <include refid="DetailsQueryFields"/>
+        FROM
+        pms_attribute_template
+        LEFT JOIN
+        pms_attribute
+        ON
+        pms_attribute_template.id=pms_attribute.template_id
+        WHERE
+        pms_attribute_template.id=#{id} AND pms_attribute.type=#{attributeType}
+    </select>
+
+    <!-- List<AttributeTemplateVO> list(); -->
+    <select id="list" resultMap="StandardResultMap">
+        SELECT
+        <include refid="StandardQueryFields"/>
+        FROM pms_attribute_template
+        ORDER BY sort DESC, gmt_modified DESC
+    </select>
+
+    <!-- List<AttributeTemplateListItemVO> listByCategoryId(Long categoryId); -->
+    <select id="listByCategoryId" resultMap="ListItemResultMap">
+        SELECT
+        <include refid="ListItemQueryFields"/>
+        FROM pms_attribute_template
+        RIGHT JOIN pms_category_attribute_template
+        ON pms_attribute_template.id = pms_category_attribute_template.attribute_template_id
+        WHERE category_id = #{categoryId}
+    </select>
+
+</mapper>

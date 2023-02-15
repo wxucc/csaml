@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.seata:seata-core:1.4.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../.m2/repository/io/seata/seata-core/1.4.2/seata-core-1.4.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../.m2/repository/io/seata/seata-core/1.4.2/seata-core-1.4.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../.m2/repository/io/seata/seata-core/1.4.2/seata-core-1.4.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

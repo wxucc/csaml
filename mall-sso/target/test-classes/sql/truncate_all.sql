@@ -1,0 +1,1 @@
+truncate ams_admin;

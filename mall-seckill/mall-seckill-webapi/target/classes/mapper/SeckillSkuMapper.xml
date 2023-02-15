@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.seckill.mapper.SeckillSkuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.seckill.model.SeckillSku">
+        <id column="id" property="id" />
+        <result column="sku_id" property="skuId" />
+        <result column="spu_id" property="spuId" />
+        <result column="seckill_stock" property="seckillStock" />
+        <result column="seckill_price" property="seckillPrice" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="seckill_limit" property="seckillLimit" />
+    </resultMap>
+
+    <sql id="SimpleFields">
+        <if test="true">
+            id,
+            sku_id,
+            spu_id,
+            seckill_stock,
+            seckill_price,
+            gmt_create,
+            gmt_modified,
+            seckill_limit
+        </if>
+    </sql>
+    <!-- 根据spuId查询秒杀sku列表 -->
+    <select id="findSeckillSkusBySpuId" resultMap="BaseResultMap">
+        select
+            <include refid="SimpleFields" />
+        from
+            seckill_sku
+        where
+            spu_id=#{spuId}
+    </select>
+
+
+</mapper>

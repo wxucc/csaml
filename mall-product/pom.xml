@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.tedu.mall</groupId>
+        <artifactId>cs-mall-all</artifactId>
+        <version>1.0.0</version><!-- lookup parent from repository -->
+    </parent>
+    <groupId>cn.tedu.mall</groupId>
+    <artifactId>mall-product</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <name>mall-product</name>
+    <modules>
+        <module>mall-product-webapi</module>
+        <module>mall-product-service</module>
+    </modules>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

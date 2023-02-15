@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.SkuMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id,
+            spu_id,
+            title,
+            bar_code,
+            attribute_template_id,
+            specifications,
+            album_id,
+            pictures,
+            price,
+            stock,
+            stock_threshold,
+            sales,
+            comment_count,
+            positive_comment_count,
+            sort
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.SkuStandardVO">
+        <id column="id" property="id"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="title" property="title"/>
+        <result column="bar_code" property="barCode"/>
+        <result column="attribute_template_id" property="attributeTemplateId"/>
+        <result column="data" property="data"/>
+        <result column="album_id" property="albumId"/>
+        <result column="pictures" property="pictures"/>
+        <result column="price" property="price"/>
+        <result column="stock" property="stock"/>
+        <result column="stock_threshold" property="stockThreshold"/>
+        <result column="sales" property="sales"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="positive_comment_count" property="positiveCommentCount"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <!-- 注意：此id是分布式的，从外部生成，不是自动编号的，则需要插入id值 -->
+    <!-- int insert(Sku sku); -->
+    <insert id="insert">
+        insert into pms_sku (id, spu_id, title, bar_code, attribute_template_id, specifications,
+                             album_id, pictures, price, stock, stock_threshold, sort)
+        values (#{id}, #{spuId}, #{title}, #{barCode}, #{attributeTemplateId}, #{specifications},
+                #{albumId}, #{pictures}, #{price}, #{stock}, #{stockThreshold}, #{sort})
+    </insert>
+
+    <!-- 注意：此id是分布式的，从外部生成，不是自动编号的，则需要插入id值 -->
+    <!-- int insertBatch(List<Sku> skuList); -->
+    <insert id="insertBatch">
+        insert into pms_sku (id,spu_id,title,bar_code,attribute_template_id,specifications,
+        album_id,pictures,price,stock,stock_threshold,sort) values
+        <foreach collection="list" item="sku" separator=",">
+            (#{sku.id}, #{sku.spuId}, #{sku.title}, #{sku.barCode}, #{sku.attributeTemplateId}, #{sku.specifications},
+            #{sku.albumId}, #{sku.pictures}, #{sku.price}, #{sku.stock}, #{sku.stockThreshold}, #{sku.sort})
+        </foreach>
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        delete
+        from pms_sku
+        where id = #{id}
+    </delete>
+
+    <!-- int updateFullInfoById(Sku sku); -->
+    <update id="updateFullInfoById">
+        update pms_sku
+        <set>
+            <if test="spuId != null">
+                spu_id=#{spuId},
+            </if>
+            <if test="title != null">
+                title=#{title},
+            </if>
+            <if test="barCode != null">
+                bar_code=#{barCode},
+            </if>
+            <if test="attributeTemplateId != null">
+                attribute_template_id=#{attributeTemplateId},
+            </if>
+            <if test="specifications != null">
+                specifications=#{specifications},
+            </if>
+            <if test="albumId != null">
+                album_id=#{albumId},
+            </if>
+            <if test="pictures != null">
+                pictures=#{pictures},
+            </if>
+            <if test="price != null">
+                price=#{price},
+            </if>
+            <if test="stock != null">
+                stock=#{stock},
+            </if>
+            <if test="stockThreshold != null">
+                stock_threshold=#{stockThreshold},
+            </if>
+            <if test="sales != null">
+                sales=#{sales},
+            </if>
+            <if test="commentCount != null">
+                comment_count=#{commentCount},
+            </if>
+            <if test="positiveCommentCount != null">
+                positive_comment_count=#{positiveCommentCount},
+            </if>
+            <if test="sort != null">
+                sort=#{sort},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- int sumStockBySpuId(Long spuId); -->
+    <select id="sumStockBySpuId" resultType="int">
+        SELECT SUM(stock)
+        FROM pms_sku
+        WHERE spu_id = #{spuId}
+    </select>
+
+    <!-- BigDecimal getMinPriceBySpuId(Long spuId); -->
+    <select id="getMinPriceBySpuId" resultType="java.math.BigDecimal">
+        SELECT MIN(price)
+        FROM pms_sku
+        WHERE spu_id = #{spuId}
+    </select>
+
+    <!-- SkuVO getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_sku
+        where id = #{id}
+    </select>
+
+    <!-- List<SkuVO> listBySpuId(Long spuId); -->
+    <select id="listBySpuId" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_sku
+        where spu_id = #{spuId}
+        order by sort desc, gmt_modified desc
+    </select>
+
+    <update id="updateStockById">
+        update pms_sku set stock=stock-#{stock}
+        where id=#{id} and stock>#{stock}
+    </update>
+</mapper>

@@ -1,0 +1,65 @@
+# ##################################################################### #
+#                            【开发】环境配置                             #
+# ##################################################################### #
+# 当前文件是Profile配置，需要主配置文件中通过spring.profiles.active激活后生效 #
+# ##################################################################### #
+
+#定义云服务器或者本地ip
+my:
+  server:
+    #addr: 106.175.107.221
+    addr: 192.168.137.150
+# 日志显示级别
+logging:
+  level:
+    cn.tedu.mall: info
+# Spring相关配置
+spring:
+  # 数据源配置
+  datasource:
+    url: jdbc:mysql://${my.server.addr}:3306/mall_pms?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true&allowPublicKeyRetrieval=true
+    username: root
+    password: tarena2017Up;
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # jackson配置
+  jackson:
+    # 为null的属性不显示到响应结果中
+    default-property-inclusion: non_null
+  redis:
+    host: ${my.server.addr}
+    port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${my.server.addr}:8848
+  application:
+    name: mall-product
+dubbo:
+  application:
+    name: mall-product
+  protocol:
+    port: -1
+    name: dubbo
+  registry:
+    address: nacos://${my.server.addr}:8848
+    use-as-config-center: false
+    use-as-metadata-center: false
+  consumer:
+    check: false
+
+seata:
+  tx-service-group: csmall_group
+  service:
+    vgroup-mapping:
+      csmall_group: default
+    grouplist:
+      default: ${my.server.addr}:8091
+  client:
+    undo:
+      log-serialization: jackson
+#后期删除
+custom:
+  file-upload:
+    server-local-path: 1
+    resource-host: 1

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.AlbumMapper">
+
+    <!-- 标准查询映射结果 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id, name, description, sort
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.AlbumStandardVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <!-- int insert(Album album); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_album (name, description, sort)
+        values (#{name}, #{description}, #{sort})
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        delete
+        from pms_album
+        where id = #{id}
+    </delete>
+
+    <!-- int update(Album album); -->
+    <update id="update">
+        update pms_album
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="description != null">
+                description=#{description},
+            </if>
+            <if test="sort != null">
+                sort=#{sort},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- AlbumVO getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_album
+        where id = #{id}
+    </select>
+
+    <!-- AlbumStandardVO getByName(String name); -->
+    <select id="getByName" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_album
+        where name = #{name}
+    </select>
+
+    <!-- 查询所有相册记录 -->
+    <!-- List<AlbumVO> findAll() -->
+    <select id="list" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_album
+        order by sort desc, gmt_modified desc
+    </select>
+
+</mapper>

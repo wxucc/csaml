@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.sso.mapper.admin.AdminMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.admin.model.Admin">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="nickname" property="nickname" />
+        <result column="avatar" property="avatar" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="description" property="description" />
+        <result column="is_enable" property="enable" />
+        <result column="last_login_ip" property="lastLoginIp" />
+        <result column="login_count" property="loginCount" />
+        <result column="gmt_last_login" property="gmtLastLogin" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.admin.vo.AdminVO">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="nickname" property="nickname" />
+        <result column="avatar" property="avatar" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="description" property="description" />
+        <result column="is_enable" property="enable" />
+        <result column="last_login_ip" property="lastLoginIp" />
+        <result column="login_count" property="loginCount" />
+        <result column="gmt_last_login" property="gmtLastLogin" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id,
+            username,
+            nickname,
+            avatar,
+            phone,
+            email,
+            description,
+            is_enable,
+            last_login_ip,
+            login_count,
+            gmt_last_login,
+            gmt_create,
+            gmt_modified
+        </if>
+    </sql>
+    <!-- 根据管理员用户名查询管理员详情 -->
+    <!-- Admin findByUsername(@Param("username") String username); -->
+    <select id="findByUsername" resultMap="BaseResultMap">
+        select
+        id,
+        username,
+        password,
+        nickname,
+        avatar,
+        phone,
+        email,
+        description,
+        is_enable,
+        last_login_ip,
+        login_count,
+        gmt_last_login,
+        gmt_create,
+        gmt_modified
+        from ams_admin
+        where
+        username=#{username}
+    </select>
+    <select id="findById" resultMap="StandardResultMap">
+        select
+            <include refid="StandardQueryFields"/>
+        from
+            ams_admin
+        where
+            id=#{id};
+    </select>
+</mapper>

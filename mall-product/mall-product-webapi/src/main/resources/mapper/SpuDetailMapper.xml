@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.SpuDetailMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id, spu_id, detail
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.SpuDetailStandardVO">
+        <id column="id" property="id"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="detail" property="detail"/>
+    </resultMap>
+
+    <!-- int insert(SpuDetail spuDetail); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_spu_detail (spu_id, detail)
+        values (#{spuId}, #{detail})
+    </insert>
+
+    <!-- int deleteBySpuId(Long spuId); -->
+    <delete id="deleteBySpuId">
+        delete
+        from pms_spu_detail
+        where spu_id = #{spuId}
+    </delete>
+
+    <!-- int updateDetailBySpuId(@Param("spuId") Long spuId, @Param("detail") String detail); -->
+    <update id="updateDetailBySpuId">
+        update pms_spu_detail
+        set detail=#{detail}
+        where spu_id = #{spuId}
+    </update>
+
+    <!-- SpuDetailVO getBySpuId(Long spuId); -->
+    <select id="getBySpuId" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_spu_detail
+        where spu_id = #{spuId}
+    </select>
+
+</mapper>

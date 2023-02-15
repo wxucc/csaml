@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.ums.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.ums.model.User">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="nickname" property="nickname" />
+        <result column="avatar" property="avatar" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="is_enable" property="enable" />
+        <result column="reward_point" property="rewardPoint" />
+        <result column="last_login_ip" property="lastLoginIp" />
+        <result column="login_count" property="loginCount" />
+        <result column="gmt_last_login" property="gmtLastLogin" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+    <resultMap id="SimpleResultMap" type="cn.tedu.mall.pojo.ums.vo.UserVO">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="nickname" property="nickname" />
+        <result column="avatar" property="avatar" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="is_enable" property="enable" />
+        <result column="reward_point" property="rewardPoint" />
+        <result column="last_login_ip" property="lastLoginIp" />
+        <result column="login_count" property="loginCount" />
+        <result column="gmt_last_login" property="gmtLastLogin" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+    <sql id="BaseQueryFields">
+        <if test="true">
+            id,
+            username,
+            password,
+            nickname,
+            avatar,
+            phone,
+            email,
+            is_enable,
+            reward_point,
+            last_login_ip,
+            login_count,
+            gmt_last_login,
+            gmt_create,
+            gmt_modified
+        </if>
+    </sql>
+    <sql id="SimpleQueryFields">
+        <if test="true">
+            id,
+            username,
+            nickname,
+            avatar,
+            phone,
+            email,
+            is_enable,
+            reward_point,
+            last_login_ip,
+            login_count,
+            gmt_last_login,
+            gmt_create,
+            gmt_modified
+        </if>
+    </sql>
+    <select id="selectUserByUsername" resultMap="SimpleResultMap">
+        select
+            <include refid="SimpleQueryFields"/>
+        from
+            ums_user
+        where
+            username=#{username}
+    </select>
+    <insert id="insertUser">
+        insert into ums_user (
+        id,
+        username,
+        password,
+        phone,
+        email,
+        nickname,
+        is_enable
+        ) values (
+        #{id},
+        #{username},
+        #{password},
+        #{phone},
+        #{email},
+        #{nickname},
+        1)
+    </insert>
+    <select id="selectExistByUsernameOrPhoneOrEmail" resultType="int">
+        select
+            count(*)
+        from
+            ums_user
+        where
+            ${type}=#{value}
+    </select>
+    <select id="selectUserById" resultMap="BaseResultMap">
+        select
+            <include refid="BaseQueryFields"/>
+        from
+            ums_user
+        where
+            id=#{userId}
+    </select>
+    <update id="updatePasswordById">
+        update
+            ums_user
+        set
+            password=#{newPassword}
+        where
+            id=#{userId}
+    </update>
+</mapper>

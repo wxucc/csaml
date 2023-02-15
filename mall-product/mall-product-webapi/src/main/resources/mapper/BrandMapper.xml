@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.BrandMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            pms_brand.id,
+            pms_brand.name,
+            pms_brand.pinyin,
+            pms_brand.logo,
+            pms_brand.description,
+            pms_brand.keywords,
+            pms_brand.sort,
+            pms_brand.sales,
+            pms_brand.product_count,
+            pms_brand.comment_count,
+            pms_brand.positive_comment_count,
+            pms_brand.enable
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.BrandStandardVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pinyin" property="pinyin"/>
+        <result column="logo" property="logo"/>
+        <result column="description" property="description"/>
+        <result column="keywords" property="keywords"/>
+        <result column="sort" property="sort"/>
+        <result column="sales" property="sales"/>
+        <result column="product_count" property="productCount"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="positive_comment_count" property="positiveCommentCount"/>
+        <result column="enable" property="enable"/>
+    </resultMap>
+
+    <!-- int insert(Brand brand); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_brand (name, pinyin, logo, description, keywords, sort, sales, product_count, comment_count,
+                               positive_comment_count, enable)
+        values (#{name}, #{pinyin}, #{logo}, #{description}, #{keywords}, #{sort}, #{sales}, #{productCount},
+                #{commentCount}, #{positiveCommentCount}, #{enable})
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        DELETE
+        FROM pms_brand
+        WHERE id = #{id}
+    </delete>
+
+    <!-- int updateFullInfoById(Brand brand); -->
+    <update id="updateFullInfoById">
+        update pms_brand
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="pinyin!=null">
+                pinyin=#{pinyin},
+            </if>
+            <if test="logo!=null">
+                logo=#{logo},
+            </if>
+            <if test="description!=null">
+                description=#{description},
+            </if>
+            <if test="keywords!=null">
+                keywords=#{keywords},
+            </if>
+            <if test="sort!=null">
+                sort=#{sort},
+            </if>
+            <if test="sales!=null">
+                sales=#{sales},
+            </if>
+            <if test="productCount!=null">
+                product_count=#{productCount},
+            </if>
+            <if test="commentCount!=null">
+                comment_count=#{commentCount},
+            </if>
+            <if test="positiveCommentCount!=null">
+                positive_comment_count=#{positiveCommentCount},
+            </if>
+            <if test="enable!=null">
+                enable=#{enable},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- BrandVO getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_brand
+        where id=#{id}
+    </select>
+
+    <!-- BrandSimpleVO getByName(String name); -->
+    <select id="getByName" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_brand
+        where name=#{name}
+    </select>
+
+    <!-- List<BrandVO> list(); -->
+    <select id="list" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_brand
+        order by sort desc, gmt_modified desc
+    </select>
+
+    <!-- List<BrandVO> listByCategoryId(Long categoryId); -->
+    <select id="listByCategoryId" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_brand
+        inner join pms_brand_category on pms_brand.id=pms_brand_category.brand_id
+        where pms_brand_category.category_id = #{categoryId}
+        order by pms_brand.sort desc, pms_brand.gmt_modified desc
+    </select>
+
+</mapper>

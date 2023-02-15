@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cs-mall-all.iml" filepath="$PROJECT_DIR$/cs-mall-all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-leaf/leaf-core/leaf-core.iml" filepath="$PROJECT_DIR$/mall-leaf/leaf-core/leaf-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-leaf/leaf-server/leaf-server.iml" filepath="$PROJECT_DIR$/mall-leaf/leaf-server/leaf-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-ams/mall-ams.iml" filepath="$PROJECT_DIR$/mall-ams/mall-ams.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-ams/mall-ams-service/mall-ams-service.iml" filepath="$PROJECT_DIR$/mall-ams/mall-ams-service/mall-ams-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-ams/mall-ams-webapi/mall-ams-webapi.iml" filepath="$PROJECT_DIR$/mall-ams/mall-ams-webapi/mall-ams-webapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-common/mall-common.iml" filepath="$PROJECT_DIR$/mall-common/mall-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-front/mall-front.iml" filepath="$PROJECT_DIR$/mall-front/mall-front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-front/mall-front-service/mall-front-service.iml" filepath="$PROJECT_DIR$/mall-front/mall-front-service/mall-front-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-front/mall-front-webapi/mall-front-webapi.iml" filepath="$PROJECT_DIR$/mall-front/mall-front-webapi/mall-front-webapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-gateway-server/mall-gateway-server.iml" filepath="$PROJECT_DIR$/mall-gateway-server/mall-gateway-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-leaf/mall-leaf.iml" filepath="$PROJECT_DIR$/mall-leaf/mall-leaf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-order/mall-order.iml" filepath="$PROJECT_DIR$/mall-order/mall-order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-order/mall-order-service/mall-order-service.iml" filepath="$PROJECT_DIR$/mall-order/mall-order-service/mall-order-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-order/mall-order-webapi/mall-order-webapi.iml" filepath="$PROJECT_DIR$/mall-order/mall-order-webapi/mall-order-webapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-pojo/mall-pojo.iml" filepath="$PROJECT_DIR$/mall-pojo/mall-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-product/mall-product.iml" filepath="$PROJECT_DIR$/mall-product/mall-product.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-product/mall-product-service/mall-product-service.iml" filepath="$PROJECT_DIR$/mall-product/mall-product-service/mall-product-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-product/mall-product-webapi/mall-product-webapi.iml" filepath="$PROJECT_DIR$/mall-product/mall-product-webapi/mall-product-webapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-resource/mall-resource.iml" filepath="$PROJECT_DIR$/mall-resource/mall-resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-search/mall-search.iml" filepath="$PROJECT_DIR$/mall-search/mall-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-search/mall-search-service/mall-search-service.iml" filepath="$PROJECT_DIR$/mall-search/mall-search-service/mall-search-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-search/mall-search-webapi/mall-search-webapi.iml" filepath="$PROJECT_DIR$/mall-search/mall-search-webapi/mall-search-webapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-seckill/mall-seckill.iml" filepath="$PROJECT_DIR$/mall-seckill/mall-seckill.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-seckill/mall-seckill-service/mall-seckill-service.iml" filepath="$PROJECT_DIR$/mall-seckill/mall-seckill-service/mall-seckill-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-seckill/mall-seckill-webapi/mall-seckill-webapi.iml" filepath="$PROJECT_DIR$/mall-seckill/mall-seckill-webapi/mall-seckill-webapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-sso/mall-sso.iml" filepath="$PROJECT_DIR$/mall-sso/mall-sso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-ums/mall-ums.iml" filepath="$PROJECT_DIR$/mall-ums/mall-ums.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-ums/mall-ums-service/mall-ums-service.iml" filepath="$PROJECT_DIR$/mall-ums/mall-ums-service/mall-ums-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mall-ums/mall-ums-webapi/mall-ums-webapi.iml" filepath="$PROJECT_DIR$/mall-ums/mall-ums-webapi/mall-ums-webapi.iml" />
+    </modules>
+  </component>
+</project>

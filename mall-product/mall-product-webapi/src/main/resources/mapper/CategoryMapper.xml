@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.CategoryMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            pms_category.id,
+            pms_category.name,
+            pms_category.parent_id,
+            pms_category.depth,
+            pms_category.keywords,
+            pms_category.sort,
+            pms_category.icon,
+            pms_category.enable,
+            pms_category.is_parent,
+            pms_category.is_display
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.CategoryStandardVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="depth" property="depth"/>
+        <result column="keywords" property="keywords"/>
+        <result column="sort" property="sort"/>
+        <result column="icon" property="icon"/>
+        <result column="enable" property="enable"/>
+        <result column="is_parent" property="parent"/>
+        <result column="is_display" property="display"/>
+    </resultMap>
+
+    <!-- int insert(Category category); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_category (name, parent_id, depth, keywords, sort, icon, enable, is_parent, is_display,
+                                  gmt_create, gmt_modified)
+        values (#{name},
+                #{parentId},
+                #{depth},
+                #{keywords},
+                #{sort},
+                #{icon},
+                #{enable},
+                #{parent},
+                #{display},
+                #{gmtCreate},
+                #{gmtModified})
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        DELETE
+        FROM pms_category
+        WHERE id = #{id}
+    </delete>
+
+    <!-- int updateParentById(@Param("id") Long id, @Param("parent") Integer parent); -->
+    <update id="updateParentById">
+        update pms_category
+        set is_parent=#{parent}
+        where id = #{id}
+    </update>
+
+    <!-- int updateEnableById(@Param("id") Long id, @Param("enable") Integer enable); -->
+    <update id="updateEnableById">
+        update pms_category
+        set enable=#{enable}
+        where id = #{id}
+    </update>
+
+    <!-- int updateDisplayById(@Param("id") Long id, @Param("display") Integer display); -->
+    <update id="updateDisplayById">
+        update pms_category
+        set is_display=#{display}
+        where id = #{id}
+    </update>
+
+    <!-- int updateBaseInfoById(Category category); -->
+    <update id="updateBaseInfoById">
+        update pms_category
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="keywords!=null">
+                keywords=#{keywords},
+            </if>
+            <if test="icon!=null">
+                icon=#{icon},
+            </if>
+            <if test="sort!=null">
+                sort=#{sort},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- int updateFullInfoById(Category category); -->
+    <update id="updateFullInfoById">
+        update pms_category
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="keywords!=null">
+                keywords=#{keywords},
+            </if>
+            <if test="icon!=null">
+                icon=#{icon},
+            </if>
+            <if test="enable!=null">
+                enable=#{enable},
+            </if>
+
+            <if test="display!=null">
+                is_display=#{display},
+            </if>
+            <if test="sort!=null">
+                sort=#{sort},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- Integer countByName(String name); -->
+    <select id="countByName" resultType="int">
+        select count(*)
+        from pms_category
+        where name = #{name}
+    </select>
+
+    <!-- int countByParentId(Long parentId); -->
+    <select id="countByParentId" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_category
+        WHERE parent_id = #{parentId}
+    </select>
+
+    <!-- CategorySimpleVO getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_category
+        where id = #{id}
+    </select>
+
+    <!-- CategorySimpleVO getByName(String name); -->
+    <select id="getByName" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_category
+        where name = #{name}
+    </select>
+
+    <!-- List<Category> list(); -->
+    <select id="list" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_category
+        order by sort desc, gmt_modified desc
+    </select>
+
+    <!-- List<Category> listByBrandId(Long brandId); -->
+    <select id="listByBrandId" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_category
+        inner join pms_brand_category on
+        pms_category.id = pms_brand_category.category_id
+        where pms_brand_category.brand_id = #{brandId}
+        order by pms_category.sort desc, pms_category.gmt_modified desc
+    </select>
+
+    <!-- List<CategoryVO> listByParentId(Long parentId); -->
+    <select id="listByParentId" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_category
+        where parent_id = #{parentId}
+        order by sort desc, gmt_modified desc
+    </select>
+
+    <!--全量查询分类 @xiao-->
+    <select id="selectAllCategories" resultMap="StandardResultMap">
+        select <include refid="StandardQueryFields"/> from pms_category;
+    </select>
+</mapper>

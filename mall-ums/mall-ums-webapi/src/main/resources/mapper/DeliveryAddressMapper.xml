@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.ums.mapper.DeliveryAddressMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.ums.model.DeliveryAddress">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="contact_name" property="contactName" />
+        <result column="mobile_phone" property="mobilePhone" />
+        <result column="telephone" property="telephone" />
+        <result column="province_code" property="provinceCode" />
+        <result column="province_name" property="provinceName" />
+        <result column="city_code" property="cityCode" />
+        <result column="city_name" property="cityName" />
+        <result column="district_code" property="districtCode" />
+        <result column="district_name" property="districtName" />
+        <result column="street_code" property="streetCode" />
+        <result column="street_name" property="streetName" />
+        <result column="detailed_address" property="detailedAddress" />
+        <result column="tag" property="tag" />
+        <result column="is_default" property="defaultAddress" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.ums.vo.DeliveryAddressStandardVO">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="contact_name" property="contactName" />
+        <result column="mobile_phone" property="mobilePhone" />
+        <result column="telephone" property="telephone" />
+        <result column="province_code" property="provinceCode" />
+        <result column="province_name" property="provinceName" />
+        <result column="city_code" property="cityCode" />
+        <result column="city_name" property="cityName" />
+        <result column="district_code" property="districtCode" />
+        <result column="district_name" property="districtName" />
+        <result column="street_code" property="streetCode" />
+        <result column="street_name" property="streetName" />
+        <result column="detailed_address" property="detailedAddress" />
+        <result column="tag" property="tag" />
+        <result column="is_default" property="defaultAddress" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id,
+            user_id,
+            contact_name,
+            mobile_phone,
+            telephone,
+            province_code,
+            province_name,
+            city_code,
+            city_name,
+            district_code,
+            district_name,
+            street_code,
+            street_name,
+            detailed_address,
+            tag,
+            is_default,
+            gmt_create,
+            gmt_modified
+        </if>
+    </sql>
+    <select id="selectAddressesByUserId" resultMap="StandardResultMap">
+        select
+            <include refid="StandardQueryFields"/>
+        from
+            ums_delivery_address
+        where
+            user_id=#{userId}
+        order by
+            gmt_modified desc
+    </select>
+    <insert id="insertDeliveryAddress">
+        insert into ums_delivery_address(
+            user_id,
+            contact_name,
+            mobile_phone,
+            telephone,
+            province_code,
+            province_name,
+            city_code,
+            city_name,
+            district_code,
+            district_name,
+            street_code,
+            street_name,
+            detailed_address,
+            tag,
+            is_default
+        ) values (
+            #{userId},
+            #{contactName},
+            #{mobilePhone},
+            #{telephone},
+            #{provinceCode},
+            #{provinceName},
+            #{cityCode},
+            #{cityName},
+            #{districtCode},
+            #{districtName},
+            #{streetCode},
+            #{streetName},
+            #{detailedAddress},
+            #{tag},
+            #{defaultAddress}
+        )
+    </insert>
+    <select id="selectCountByUserId" resultType="int">
+        select
+            count(*)
+        from
+            ums_delivery_address
+        where
+            user_id=#{userId}
+    </select>
+    <update id="updateAddressById">
+        update
+            ums_delivery_address
+        <set>
+            <if test="userId!=null">
+                user_id=#{userId},
+            </if>
+            <if test="contactName!=null">
+                contact_name=#{contactName},
+            </if>
+            <if test="mobilePhone!=null">
+                mobile_phone=#{mobilePhone},
+            </if>
+            <if test="telephone!=null">
+                telephone=#{telephone},
+            </if>
+            <if test="provinceCode!=null">
+                province_code=#{provinceCode},
+            </if>
+            <if test="provinceName!=null">
+                province_name=#{provinceName},
+            </if>
+            <if test="cityCode!=null">
+                city_code=#{cityCode},
+            </if>
+            <if test="cityName!=null">
+                city_name=#{cityName},
+            </if>
+            <if test="districtCode!=null">
+                district_code=#{districtCode},
+            </if>
+            <if test="districtName!=null">
+                district_name=#{districtName},
+            </if>
+            <if test="streetCode!=null">
+                street_code=#{streetCode},
+            </if>
+            <if test="streetName!=null">
+                street_name=#{streetName},
+            </if>
+            <if test="detailedAddress!=null">
+                detailed_address=#{detailedAddress},
+            </if>
+            <if test="tag!=null">
+                tag=#{tag},
+            </if>
+            <if test="defaultAddress!=null">
+                is_default=#{defaultAddress},
+            </if>
+        </set>
+        where
+            id=#{id}
+    </update>
+    <delete id="deleteAddressById">
+        delete
+        from
+            ums_delivery_address
+        where
+            id=#{id}
+    </delete>
+</mapper>

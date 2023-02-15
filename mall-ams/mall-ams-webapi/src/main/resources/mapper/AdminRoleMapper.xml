@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.ams.mapper.AdminRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.admin.model.AdminRole">
+        <id column="id" property="id" />
+        <result column="admin_id" property="adminId" />
+        <result column="role_id" property="roleId" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+    <select id="countAdminRoleByAdminidAndRoleid" resultType="int">
+        select count(*)
+            from
+            ams_admin_role
+        where
+            role_id=#{roleId}
+        and
+            admin_id=#{adminId}
+    </select>
+    <insert id="insertAdminRole">
+        insert into ams_admin_role (
+        admin_id,
+        role_id) values (
+        #{adminId},
+        #{roleId});
+    </insert>
+    <delete id="deleteAdminRole">
+        delete
+            from
+            ams_admin_role
+        where
+            admin_id=#{adminId}
+    </delete>
+    <select id="selectRelationByRoleid" resultType="int">
+        select count(*)
+            from
+            ams_admin_role
+        where
+            role_id=#{roleId}
+    </select>
+    <delete id="deleteAdminRoleByAdminId">
+        delete
+            from
+            ams_admin_role
+        where
+            admin_id=#{adminId};
+    </delete>
+</mapper>

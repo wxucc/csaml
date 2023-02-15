@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.PictureMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id, album_id, url, is_cover, description, width, height, sort
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.PictureStandardVO">
+        <id column="id" property="id"/>
+        <result column="album_id" property="albumId"/>
+        <result column="url" property="url"/>
+        <result column="is_cover" property="cover"/>
+        <result column="description" property="description"/>
+        <result column="width" property="width"/>
+        <result column="height" property="height"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <!-- int insert(Picture picture); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_picture (album_id, url, is_cover, description, width, height, sort)
+        values (#{albumId}, #{url}, #{cover}, #{description}, #{width}, #{height}, #{sort})
+    </insert>
+
+    <!-- int insertBatch(List<Picture> pictures); -->
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_picture (album_id, url, is_cover, description, width, height, sort) values
+        <foreach collection="list" item="pic" separator=",">
+            (
+            #{pic.albumId},
+            #{pic.url},
+            #{pic.description},
+            #{pic.cover},
+            #{pic.width},
+            #{pic.height},
+            #{pic.sort}
+            )
+        </foreach>
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        delete
+        from pms_picture
+        where id = #{id}
+    </delete>
+
+    <!-- int updateCoverById(Long id); -->
+    <update id="updateCoverById">
+        update pms_picture
+        set is_cover = 1
+        where id = #{id}
+    </update>
+
+    <!-- int updateNonCoverByAlbumId(Long albumId); -->
+    <update id="updateNonCoverByAlbumId">
+        update pms_picture
+        set is_cover = 0
+        where album_id = #{albumId}
+    </update>
+
+    <!-- int countByAlbumId(Long albumId); -->
+    <select id="countByAlbumId" resultType="int">
+        select count(*)
+        from pms_picture
+        where album_id = #{albumId}
+    </select>
+
+    <!-- PictureVO getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_picture
+        where id=#{id}
+    </select>
+
+    <!-- PictureStandardVO getByUrl(String url); -->
+    <select id="getByUrl" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_picture
+        where url=#{url}
+    </select>
+
+    <!-- PictureSimpleVO getCoverPictureByAlbumId(Long albumId); -->
+    <select id="getCoverPictureByAlbumId" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_picture
+        where is_cover=1 and album_id=#{albumId}
+    </select>
+
+    <!-- List<String> listUrlsByAlbumId(Long albumId); -->
+    <select id="listUrlsByAlbumId" resultType="java.lang.String">
+        select url
+        from pms_picture
+        where album_id = #{albumId}
+        order by is_cover desc, sort desc, gmt_modified desc
+    </select>
+
+    <!-- List<PictureVO> listByAlbumId(Long albumId); -->
+    <select id="listByAlbumId" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_picture
+        where album_id = #{albumId}
+        order by is_cover desc, sort desc, gmt_modified desc
+    </select>
+
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.BrandCategoryMapper">
+
+    <!-- 关联查询字段列表 -->
+    <sql id="RelationQueryFields">
+        <if test="true">
+            pms_brand_category.id as record_id,
+            pms_brand.id as brand_id,
+            pms_brand.name as brand_name,
+            pms_brand.pinyin as brand_pinyin,
+            pms_brand.logo as brand_logo,
+            pms_brand.description as brand_description,
+            pms_brand.enable as is_brand_enable,
+            pms_category.id as category_id,
+            pms_category.name as category_name,
+            pms_category.parent_id as category_parent_id,
+            pms_category.icon as category_icon,
+            pms_category.enable as is_category_enable,
+            pms_category.is_display as is_category_display
+        </if>
+    </sql>
+
+    <!-- 关联查询映射结果 -->
+    <resultMap id="RelationResultMap" type="cn.tedu.mall.pojo.product.vo.BrandCategoryStandardVO">
+        <id column="record_id" property="recordId"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="brand_name" property="brandName"/>
+        <result column="brand_pinyin" property="brandPinyin"/>
+        <result column="brand_logo" property="brandLogo"/>
+        <result column="brand_description" property="brandDescription"/>
+        <result column="is_brand_enable" property="brandEnable"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="category_parent_id" property="categoryParentId"/>
+        <result column="category_icon" property="categoryIcon"/>
+        <result column="is_category_enable" property="categoryEnable"/>
+        <result column="is_category_display" property="categoryDisplay"/>
+    </resultMap>
+
+    <!-- int insert(BrandCategory brandCategory); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_brand_category (brand_id, category_id)
+        values (#{brandId}, #{categoryId})
+    </insert>
+
+    <!-- int deleteByBrandIdAndCategoryId(@Param("brandId") Long brandId, @Param("categoryId") Long categoryId); -->
+    <delete id="deleteByBrandIdAndCategoryId">
+        delete
+        from pms_brand_category
+        where brand_id = #{brandId}
+          and category_id = #{categoryId}
+    </delete>
+
+    <!-- int countByBrandIdAndCategoryId(@Param("brandId") Long brandId, @Param("categoryId") Long categoryId); -->
+    <select id="countByBrandIdAndCategoryId" resultType="int">
+        select count(*)
+        from pms_brand_category
+        where brand_id = #{brandId}
+          and category_id = #{categoryId}
+    </select>
+
+    <!-- List<BrandCategoryVO> list(); -->
+    <select id="list" resultMap="RelationResultMap">
+        select
+        <include refid="RelationQueryFields"/>
+        from pms_brand_category
+        left join pms_brand on pms_brand_category.brand_id = pms_brand.id
+        left join pms_category on pms_brand_category.category_id = pms_category.id
+        order by pms_brand_category.gmt_modified desc
+    </select>
+
+    <!-- List<BrandCategoryVO> listByBrandId(Long brandId); -->
+    <select id="listByBrandId" resultMap="RelationResultMap">
+        select
+        <include refid="RelationQueryFields"/>
+        from pms_brand_category
+        left join pms_brand on pms_brand_category.brand_id = pms_brand.id
+        left join pms_category on pms_brand_category.category_id = pms_category.id
+        where pms_brand_category.brand_id=#{brandId}
+        order by pms_brand_category.gmt_modified desc
+    </select>
+
+    <!-- List<BrandCategoryVO> listByCategoryId(Long categoryId); -->
+    <select id="listByCategoryId" resultMap="RelationResultMap">
+        select
+        <include refid="RelationQueryFields"/>
+        from pms_brand_category
+        left join pms_brand on pms_brand_category.brand_id = pms_brand.id
+        left join pms_category on pms_brand_category.category_id = pms_category.id
+        where pms_brand_category.category_id=#{categoryId}
+        order by pms_brand_category.gmt_modified desc
+    </select>
+
+</mapper>

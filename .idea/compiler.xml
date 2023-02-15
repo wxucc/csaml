@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mall-ams-service" />
+        <module name="mall-order-service" />
+        <module name="mall-order-webapi" />
+        <module name="mall-ams-webapi" />
+        <module name="mall-resource" />
+        <module name="mall-search-webapi" />
+        <module name="mall-sso" />
+        <module name="leaf-core" />
+        <module name="leaf-server" />
+        <module name="mall-gateway-server" />
+        <module name="mall-seckill-webapi" />
+        <module name="mall-front-service" />
+        <module name="mall-common" />
+        <module name="mall-pojo" />
+        <module name="mall-product-service" />
+        <module name="mall-ums-webapi" />
+        <module name="mall-seckill-service" />
+        <module name="mall-front-webapi" />
+        <module name="mall-product-webapi" />
+        <module name="mall-search-service" />
+        <module name="mall-ums-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cs-mall-all" target="1.8" />
+      <module name="leaf-core" target="1.8" />
+      <module name="leaf-server" target="1.8" />
+      <module name="mall-ams" target="1.8" />
+      <module name="mall-ams-service" target="1.8" />
+      <module name="mall-ams-webapi" target="1.8" />
+      <module name="mall-common" target="1.8" />
+      <module name="mall-front" target="1.8" />
+      <module name="mall-front-service" target="1.8" />
+      <module name="mall-front-webapi" target="1.8" />
+      <module name="mall-gateway-server" target="1.8" />
+      <module name="mall-leaf" target="1.8" />
+      <module name="mall-order" target="1.8" />
+      <module name="mall-order-service" target="1.8" />
+      <module name="mall-order-webapi" target="1.8" />
+      <module name="mall-pojo" target="1.8" />
+      <module name="mall-product" target="1.8" />
+      <module name="mall-product-service" target="1.8" />
+      <module name="mall-product-webapi" target="1.8" />
+      <module name="mall-resource" target="1.8" />
+      <module name="mall-search" target="1.8" />
+      <module name="mall-search-service" target="1.8" />
+      <module name="mall-search-webapi" target="1.8" />
+      <module name="mall-seckill" target="1.8" />
+      <module name="mall-seckill-service" target="1.8" />
+      <module name="mall-seckill-webapi" target="1.8" />
+      <module name="mall-sso" target="1.8" />
+      <module name="mall-ums" target="1.8" />
+      <module name="mall-ums-service" target="1.8" />
+      <module name="mall-ums-webapi" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mall-ams-service" options="-parameters" />
+      <module name="mall-ams-webapi" options="-parameters" />
+      <module name="mall-common" options="-parameters" />
+      <module name="mall-front-service" options="-parameters" />
+      <module name="mall-front-webapi" options="-parameters" />
+      <module name="mall-gateway-server" options="-parameters" />
+      <module name="mall-order-service" options="-parameters" />
+      <module name="mall-order-webapi" options="-parameters" />
+      <module name="mall-pojo" options="-parameters" />
+      <module name="mall-product-service" options="-parameters" />
+      <module name="mall-product-webapi" options="-parameters" />
+      <module name="mall-resource" options="-parameters" />
+      <module name="mall-search-service" options="-parameters" />
+      <module name="mall-search-webapi" options="-parameters" />
+      <module name="mall-seckill-service" options="-parameters" />
+      <module name="mall-seckill-webapi" options="-parameters" />
+      <module name="mall-sso" options="-parameters" />
+      <module name="mall-ums-service" options="-parameters" />
+      <module name="mall-ums-webapi" options="-parameters" />
+    </option>
+  </component>
+</project>

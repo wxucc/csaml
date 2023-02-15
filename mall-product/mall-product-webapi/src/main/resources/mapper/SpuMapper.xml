@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.SpuMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id,
+            name,
+            type_number,
+            title,
+            description,
+            list_price,
+            stock,
+            stock_threshold,
+            unit,
+            brand_id,
+            brand_name,
+            category_id,
+            category_name,
+            album_id,
+            pictures,
+            keywords,
+            tags,
+            sales,
+            comment_count,
+            positive_comment_count,
+            sort,
+            is_deleted,
+            is_published,
+            is_new_arrival,
+            is_recommend,
+            is_checked,
+            check_user,
+            gmt_check
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.SpuStandardVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type_number" property="typeNumber"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="list_price" property="listPrice"/>
+        <result column="stock" property="stock"/>
+        <result column="stock_threshold" property="stockThreshold"/>
+        <result column="unit" property="unit"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="brand_name" property="brandName"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="album_id" property="albumId"/>
+        <result column="pictures" property="pictures"/>
+        <result column="keywords" property="keywords"/>
+        <result column="tags" property="tags"/>
+        <result column="sales" property="sales"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="positive_comment_count" property="positiveCommentCount"/>
+        <result column="sort" property="sort"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="is_published" property="published"/>
+        <result column="is_new_arrival" property="newArrival"/>
+        <result column="is_recommended" property="recommended"/>
+        <result column="is_checked" property="checked"/>
+        <result column="check_user" property="checkUser"/>
+        <result column="gmt_check" property="gmtCheck"/>
+    </resultMap>
+
+    <!-- 列表查询字段列表 -->
+    <sql id="ListQueryFields">
+        <if test="true">
+            id,
+            name,
+            type_number,
+            title,
+            description,
+            list_price,
+            stock,
+            stock_threshold,
+            unit,
+            album_id,
+            pictures,
+            sales,
+            is_deleted,
+            is_published,
+            is_new_arrival,
+            is_recommend,
+            is_checked,
+            check_user,
+            gmt_check,
+            sort
+        </if>
+    </sql>
+
+    <!-- 列表查询映射结果 -->
+    <resultMap id="ListResultMap" type="cn.tedu.mall.pojo.product.vo.SpuListItemVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type_number" property="typeNumber"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="list_price" property="listPrice"/>
+        <result column="stock" property="stock"/>
+        <result column="stock_threshold" property="stockThreshold"/>
+        <result column="unit" property="unit"/>
+        <result column="album_id" property="albumId"/>
+        <result column="pictures" property="pictures"/>
+        <result column="sales" property="sales"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="positive_comment_count" property="positiveCommentCount"/>
+        <result column="is_deleted" property="deleted"/>
+        <result column="is_published" property="published"/>
+        <result column="is_new_arrival" property="newArrival"/>
+        <result column="is_recommended" property="recommended"/>
+        <result column="is_checked" property="checked"/>
+        <result column="check_user" property="checkUser"/>
+        <result column="gmt_check" property="gmtCheck"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <!-- 注意：此id是分布式的，从外部生成，不是自动编号的，则需要插入id值 -->
+    <!-- int insert(Spu spu); -->
+    <insert id="insert">
+        insert into pms_spu (id, name, type_number, title, description,
+            list_price, stock, stock_threshold, unit, brand_id,
+            brand_name, category_id, category_name, attribute_template_id, album_id,
+            pictures, keywords, tags, sort, is_deleted,
+            is_published, is_new_arrival, is_recommend, is_checked, gmt_check)
+        values (#{id}, #{name}, #{typeNumber}, #{title}, #{description},
+            #{listPrice}, #{stock}, #{stockThreshold}, #{unit}, #{brandId},
+            #{brandName}, #{categoryId}, #{categoryName}, #{attributeTemplateId}, #{albumId},
+            #{pictures}, #{keywords}, #{tags}, #{sort}, #{deleted},
+            #{published}, #{newArrival}, #{recommend}, #{checked}, #{gmtCheck})
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        delete
+        from pms_spu
+        where id = #{id}
+    </delete>
+
+    <!-- int update(Spu spu); -->
+    <update id="update">
+        <if test="id != null">
+            update pms_spu
+            <set>
+                <if test="name != null">
+                    name=#{name},
+                </if>
+                <if test="typeNumber != null">
+                    type_number=#{typeNumber},
+                </if>
+                <if test="title != null">
+                    title=#{title},
+                </if>
+                <if test="description != null">
+                    description=#{description},
+                </if>
+                <if test="listPrice != null">
+                    list_price=#{listPrice},
+                </if>
+                <if test="stockThreshold != null">
+                    stock_threshold=#{stockThreshold},
+                </if>
+                <if test="unit != null">
+                    unit=#{unit},
+                </if>
+                <if test="brandId != null">
+                    brand_id=#{brandId},
+                </if>
+                <if test="brandName != null">
+                    brand_name=#{brandName},
+                </if>
+                <if test="categoryId != null">
+                    category_id=#{categoryId},
+                </if>
+                <if test="categoryName != null">
+                    category_name=#{categoryName},
+                </if>
+                <if test="attributeTemplateId != null">
+                    attribute_template_id=#{attributeTemplateId},
+                </if>
+                <if test="albumId != null">
+                    album_id=#{albumId},
+                </if>
+                <if test="pictures != null">
+                    pictures=#{pictures},
+                </if>
+                <if test="keywords != null">
+                    keywords=#{keywords},
+                </if>
+                <if test="tags != null">
+                    tags=#{tags},
+                </if>
+                <if test="sales != null">
+                    sales=#{sales},
+                </if>
+                <if test="commentCount != null">
+                    comment_count=#{commentCount},
+                </if>
+                <if test="positiveCommentCount != null">
+                    positive_comment_count=#{positiveCommentCount},
+                </if>
+                <if test="sort != null">
+                    sort=#{sort},
+                </if>
+                <if test="deleted != null">
+                    is_deleted=#{deleted},
+                </if>
+                <if test="published != null">
+                    is_publish=#{published},
+                </if>
+                <if test="newArrival != null">
+                    is_new_arrival=#{newArrival},
+                </if>
+                <if test="recommend != null">
+                    is_recommend=#{recommend},
+                </if>
+                <if test="checked != null">
+                    is_checked=#{checked},
+                </if>
+                <if test="checkUser != null">
+                    check_user=#{checkUser},
+                </if>
+                <if test="gmtCheck != null">
+                    gmt_check=#{gmtCheck},
+                </if>
+            </set>
+            where id=#{id}
+        </if>
+    </update>
+
+    <!-- int updateCheckedById(@Param("id") Long id, @Param("isChecked") Integer isChecked); -->
+    <update id="updateCheckedById">
+        update pms_spu
+        set is_checked=#{checked}
+        where id = #{id}
+    </update>
+
+    <!-- int updatePriceById(@Param("id") Long id, @Param("price") BigDecimal price); -->
+    <update id="updatePriceById">
+        update pms_spu
+        set list_price=#{price}
+        where id = #{id}
+    </update>
+
+    <!-- int updateStockById(@Param("id") Long id, @Param("stock") Integer stock); -->
+    <update id="updateStockById">
+        update pms_spu
+        set stock=#{stock}
+        where id = #{id}
+    </update>
+
+    <!-- int countByAlbumId(Long albumId); -->
+    <select id="countByAlbumId" resultType="int">
+        select count(*)
+        from pms_spu
+        where album_id = #{albumId}
+    </select>
+
+    <!-- int countByBrandId(Long brandId); -->
+    <select id="countByBrandId" resultType="int">
+        select count(*)
+        from pms_spu
+        where brand_id = #{brandId}
+    </select>
+
+    <!-- int countByTypeNumber(String typeNumber); -->
+    <select id="countByTypeNumber" resultType="int">
+        select count(*)
+        from pms_spu
+        where type_number = #{typeNumber}
+    </select>
+
+    <!-- SpuVO getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_spu
+        where id = #{id}
+    </select>
+
+    <!-- List<SpuListItemVO> list(); -->
+    <select id="list" resultMap="ListResultMap">
+        SELECT
+        <include refid="ListQueryFields"/>
+        FROM pms_spu
+        ORDER BY
+        is_deleted,
+        is_checked DESC,
+        is_published DESC,
+        is_recommend DESC,
+        is_new_arrival DESC,
+        sort DESC,
+        sales DESC
+    </select>
+
+    <!-- List<SpuVO> listByCustomCondition(SpuQuery spuQuery); -->
+    <select id="listByCustomCondition" resultMap="ListResultMap">
+        SELECT
+        <include refid="ListQueryFields"/>
+        FROM pms_spu
+        <where>
+            <if test="name != null">
+                AND name=#{name}
+            </if>
+            <if test="brandId != null">
+                AND brand_id=#{brandId}
+            </if>
+            <if test="categoryId != null">
+                AND category_id=#{categoryId}
+            </if>
+            <if test="typeNumber != null">
+                AND type_number=#{typeNumber}
+            </if>
+            <if test="published != null">
+                AND is_published=#{published}
+            </if>
+            <if test="published == null">
+                AND is_published=1
+            </if>
+            <if test="checked != null">
+                AND is_checked=#{checked}
+            </if>
+            <if test="checked == null">
+                AND is_checked=1
+            </if>
+            <if test="deleted != null">
+                AND is_deleted=#{deleted}
+            </if>
+            <if test="deleted==null">
+                AND is_deleted=0
+            </if>
+        </where>
+        <choose>
+            <when test="orderBy != null">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY
+                is_deleted,
+                is_checked DESC,
+                is_published DESC,
+                is_recommend DESC,
+                is_new_arrival DESC,
+                sort DESC,
+                sales DESC
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

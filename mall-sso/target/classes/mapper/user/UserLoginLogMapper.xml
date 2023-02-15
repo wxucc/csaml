@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.sso.mapper.user.UserLoginLogMapper">
+   <insert id="insertUserLoginLog">
+        insert into ums_login_log (
+        user_id,
+        username,
+        nickname,
+        ip,
+        user_agent,
+        gmt_create,
+        gmt_login,
+        gmt_modified
+        ) values (
+        #{userId},
+        #{username},
+        #{nickname},
+        #{ip},
+        #{userAgent},
+        #{gmtCreate},
+        #{gmtLogin},
+        #{gmtModified}
+        )
+   </insert>
+</mapper>

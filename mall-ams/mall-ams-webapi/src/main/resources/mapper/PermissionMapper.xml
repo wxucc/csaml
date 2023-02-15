@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.ams.mapper.PermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.admin.model.Permission">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="value" property="value" />
+        <result column="description" property="description" />
+        <result column="sort" property="sort" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+    <select id="selectPermissionsByAdminId" resultMap="BaseResultMap">
+        select ap.*
+            from
+            ams_permission ap
+        inner join
+            ams_role_permission arp
+            on
+            ap.id=arp.permission_id
+        inner join
+            ams_role ar
+            on
+            arp.role_id=ar.id
+        inner join
+            ams_admin_role aar
+            on
+            ar.id=aar.role_id
+        inner join
+            ams_admin aa
+            on
+            aa.id=aar.admin_id
+        where
+            aa.id=#{adminId}
+    </select>
+    <insert id="insertPermission">
+        insert into ams_permission (
+        name,
+        value,
+        sort,
+        description)
+        values (
+        #{name},
+        #{value},
+        #{sort},
+        #{description})
+    </insert>
+    <select id="selectPermissions" resultType="cn.tedu.mall.pojo.admin.vo.PermissionVO">
+        select * from ams_permission
+        <where>
+            <if test="name!=null">
+                name like concat("%",#{name},"%")
+            </if>
+            <if test="value!=null">
+                and value like contcat("%",#{value},"%")
+            </if>
+        </where>
+    </select>
+    <update id="updatePermission">
+        update ams_permission
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="value!=null">
+                value=#{value},
+            </if>
+            <if test="description!=null">
+                description=#{description},
+            </if>
+            <if test="sort!=null">
+                sort=#{sort},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deletePermission">
+        delete
+            from
+            ams_permission
+        where
+            id=#{id}
+    </delete>
+</mapper>

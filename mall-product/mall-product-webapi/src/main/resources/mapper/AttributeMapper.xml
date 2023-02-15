@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.AttributeMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id,
+            template_id,
+            name,
+            description,
+            type,
+            input_type,
+            value_list,
+            unit,
+            sort,
+            is_allow_customize
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.AttributeStandardVO">
+        <id column="id" property="id"/>
+        <result column="template_id" property="templateId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="type" property="type"/>
+        <result column="input_type" property="inputType"/>
+        <result column="value_list" property="valueList"/>
+        <result column="unit" property="unit"/>
+        <result column="sort" property="sort"/>
+        <result column="is_allow_customize" property="allowCustomize"/>
+    </resultMap>
+
+    <!-- 详情查询字段列表 -->
+    <sql id="DetailsQueryFields">
+        <if test="true">
+            pms_attribute.id,
+            pms_attribute.name,
+            pms_attribute.description,
+            pms_attribute.type,
+            pms_attribute.input_type,
+            pms_attribute.value_list,
+            pms_attribute.unit,
+            pms_attribute.sort,
+            pms_attribute.is_allow_customize,
+            pms_attribute_template.id AS attribute_template_id,
+            pms_attribute_template.name AS attribute_template_name,
+            pms_attribute_template.pinyin AS attribute_template_pinyin,
+            pms_attribute_template.keywords AS attribute_template_keywords
+        </if>
+    </sql>
+
+    <!-- 详情查询映射结果 -->
+    <resultMap id="DetailsResultMap" type="cn.tedu.mall.pojo.product.vo.AttributeDetailsVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="type" property="type"/>
+        <result column="input_type" property="inputType"/>
+        <result column="value_list" property="valueList"/>
+        <result column="unit" property="unit"/>
+        <result column="sort" property="sort"/>
+        <result column="is_allow_customize" property="allowCustomize"/>
+        <result column="attribute_template_id" property="attributeTemplateId"/>
+        <result column="attribute_template_name" property="attributeTemplateName"/>
+        <result column="attribute_template_pinyin" property="attributeTemplatePinyin"/>
+        <result column="attribute_template_keywords" property="attributeTemplateKeywords"/>
+    </resultMap>
+
+    <!-- int insert(Attribute attribute); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_attribute (name, description, type, input_type, value_list, unit, sort, is_allow_customize,
+                                   template_id)
+        VALUES (#{name}, #{description}, #{type}, #{inputType}, #{valueList}, #{unit}, #{sort}, #{allowCustomize},
+                #{templateId})
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        DELETE
+        FROM pms_attribute
+        WHERE id = #{id}
+    </delete>
+
+    <!-- int update(Attribute attribute); -->
+    <update id="update">
+        update pms_attribute
+        <set>
+            <if test="templateId != null">
+                template_id=#{templateId},
+            </if>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="description != null">
+                description=#{description},
+            </if>
+            <if test="type!=null">
+                type=#{type},
+            </if>
+            <if test="inputType != null">
+                input_type=#{inputType},
+            </if>
+            <if test="valueList != null">
+                value_list=#{valueList},
+            </if>
+            <if test="unit != null">
+                unit=#{unit},
+            </if>
+            <if test="sort != null">
+                sort=#{sort},
+            </if>
+            <if test="allowCustomize != null">
+                is_allow_customize=#{allowCustomize},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- int countByTemplateId(Long templateId); -->
+    <select id="countByTemplateId" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_attribute
+        WHERE template_id = #{templateId}
+    </select>
+
+    <!-- AttributeVO getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        SELECT
+        <include refid="StandardQueryFields"/>
+        FROM pms_attribute
+        WHERE id=#{id}
+    </select>
+
+    <!-- AttributeDetailsVO getDetailsById(Long id); -->
+    <select id="getDetailsById" resultMap="DetailsResultMap">
+        SELECT
+        <include refid="DetailsQueryFields"/>
+        FROM
+        pms_attribute
+        LEFT JOIN
+        pms_attribute_template
+        ON
+        pms_attribute_template.id=pms_attribute.template_id
+        WHERE
+        pms_attribute.id=#{id}
+    </select>
+
+    <!-- List<AttributeSimpleVO> listByTemplateId(Long templateId); -->
+    <select id="listByTemplateId" resultMap="StandardResultMap">
+        SELECT
+        <include refid="StandardQueryFields"/>
+        FROM
+        pms_attribute
+        WHERE
+        template_id=#{templateId}
+        ORDER BY
+        sort DESC, gmt_modified DESC
+    </select>
+
+    <!-- List<AttributeSimpleVO> listByTemplateIdAndType(@Param("templateId") Long templateId, @Param("type") Integer type); -->
+    <select id="listByTemplateIdAndType" resultMap="StandardResultMap">
+        SELECT
+        <include refid="StandardQueryFields"/>
+        FROM
+        pms_attribute
+        WHERE
+        template_id=#{templateId} AND type=#{type}
+        ORDER BY
+        sort DESC, gmt_modified DESC
+    </select>
+    <select id="selectAttributesBySpuId" resultMap="StandardResultMap">
+        SELECT pa.id, pa.template_id, pa.name, pa.description, pa.type
+                    , pa.input_type, pa.value_list, pa.unit, pa.sort, pa.is_allow_customize
+        FROM pms_attribute pa
+        INNER JOIN pms_attribute_template pat ON pa.template_id = pat.id
+        INNER JOIN pms_category_attribute_template pcat ON pat.id=pcat.attribute_template_id
+        INNER JOIN pms_category pc ON pc.id=pcat.category_id
+        INNER JOIN pms_spu ps ON ps.category_id=pc.id
+        WHERE ps.id=#{spuId}
+    </select>
+</mapper>

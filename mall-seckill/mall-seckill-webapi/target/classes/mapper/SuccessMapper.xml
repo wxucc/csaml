@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.seckill.mapper.SuccessMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.seckill.model.Success">
+        <id column="id" property="id" />
+        <result column="seckill_id" property="seckillId" />
+        <result column="user_id" property="userId" />
+        <result column="user_phone" property="userPhone" />
+        <result column="sku_id" property="skuId" />
+        <result column="title" property="title" />
+        <result column="main_picture" property="mainPicture" />
+        <result column="seckill_price" property="seckillPrice" />
+        <result column="quantity" property="quantity" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="bar_code" property="barCode" />
+        <result column="data" property="data" />
+    </resultMap>
+
+
+
+</mapper>

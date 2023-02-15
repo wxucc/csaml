@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.order.mapper.OmsOrderItemMapper">
+    <!--  新增订单向(oms_order_item)的方法 -->
+    <insert id="insertOrderItemList">
+        insert into oms_order_item(
+            id,
+            order_id,
+            sku_id,
+            title,
+            bar_code,
+            data,
+            main_picture,
+            price,
+            quantity
+        )values
+        <foreach collection="list" item="ooi" separator=",">
+        (
+            #{ooi.id},
+            #{ooi.orderId},
+            #{ooi.skuId},
+            #{ooi.title},
+            #{ooi.barCode},
+            #{ooi.data},
+            #{ooi.mainPicture},
+            #{ooi.price},
+            #{ooi.quantity}
+        )
+        </foreach>
+    </insert>
+
+</mapper>

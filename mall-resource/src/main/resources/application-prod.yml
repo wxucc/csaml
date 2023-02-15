@@ -1,0 +1,66 @@
+# ##################################################################### #
+#                            【生产】环境配置                              #
+# ##################################################################### #
+#  当前文件是Profile配置，需要主配置文件中通过spring.profiles.active激活后生效   #
+# ##################################################################### #
+
+# 服务器配置
+server:
+  # 端口号
+  port: 9060
+
+# Spring相关配置
+spring:
+  # 文件上传核心配置
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+# 日志显示级别
+logging:
+  level:
+    cn.tedu.mall: info
+
+# knife4j配置
+knife4j:
+  # 开启增强配置
+  enable: true
+  # 生产环境屏蔽，开启将禁止访问在线API文档
+  production: true
+
+# 自定义配置
+custom:
+  # 文件上传
+  file-upload:
+    # 上传到的根文件夹
+    server-local-base-path: E:/csmall-upload
+    # 上传后文件的主机名
+    resource-host: http://localhost:${server.port}/
+    # 图片（例如商品图片）文件配置
+    picture:
+      # 文件夹名称
+      dir-name: picuture
+      # 文件大小限制，支持纯数字（以字节为单位），或以KB、MB、GB为单位（不区分大小写）
+      # 注意：不得超过spring.servlet.multipart中的核心配置值
+      size-limit: 10MB
+      # 允许的文件类型
+      content-type: image/jpeg, image/png
+    # 品牌Logo配置
+    brand-logo:
+      # 文件夹名称
+      dir-name: brand-logo
+      # 文件大小限制，支持纯数字（以字节为单位），或以KB、MB、GB为单位（不区分大小写）
+      # 注意：不得超过spring.servlet.multipart中的核心配置值
+      size-limit: 1MB
+      # 允许的文件类型
+      content-type: image/png
+    # 类别图标配置
+    category-icon:
+      # 文件夹名称
+      dir-name: category-icon
+      # 文件大小限制，支持纯数字（以字节为单位），或以KB、MB、GB为单位（不区分大小写）
+      # 注意：不得超过spring.servlet.multipart中的核心配置值
+      size-limit: 1MB
+      # 允许的文件类型
+      content-type: image/png

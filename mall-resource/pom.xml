@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 父级项目的参数 -->
+    <parent>
+        <groupId>cn.tedu.mall</groupId>
+        <artifactId>cs-mall-all</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <!-- 当前项目的参数 -->
+    <groupId>cn.tedu</groupId>
+    <artifactId>mall-resource</artifactId>
+    <version>1.0.0</version>
+    <name>mall-resource</name>
+    <description>Mall项目的资源服务（上传文件及文件浏览或下载）</description>
+
+    <!-- 模型版本，是固定代码 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 依赖项 -->
+    <dependencies>
+        <!-- 公共模块 -->
+        <dependency>
+            <groupId>cn.tedu</groupId>
+            <artifactId>mall-common</artifactId>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- Spring Boot Web：WEB应用 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Knife4j Spring Boot：在线API -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- 配置处理器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <!-- Spring Boot Test：测试 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

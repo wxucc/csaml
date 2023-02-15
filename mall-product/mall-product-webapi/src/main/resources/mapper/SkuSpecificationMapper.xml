@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.product.mapper.SkuSpecificationMapper">
+
+    <!-- 标准查询字段列表 -->
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id, sku_id, attribute_id, attribute_name, attribute_value, unit, sort
+        </if>
+    </sql>
+
+    <!-- 标准查询映射结果 -->
+    <resultMap id="StandardResultMap" type="cn.tedu.mall.pojo.product.vo.SkuSpecificationStandardVO">
+        <id column="id" property="id"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="attribute_id" property="attributeId"/>
+        <result column="attribute_name" property="attributeName"/>
+        <result column="attribute_value" property="attributeValue"/>
+        <result column="unit" property="unit"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <!-- int insertBatch(List<SkuSpecification> skuSpecifications); -->
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_sku_specification (sku_id, attribute_id, attribute_name, attribute_value, unit) values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.skuId},
+            #{item.attributeId},
+            #{item.attributeName},
+            #{item.attributeValue},
+            #{item.unit}
+            )
+        </foreach>
+    </insert>
+
+    <!-- int deleteById(Long id); -->
+    <delete id="deleteById">
+        delete
+        from pms_sku_specification
+        where id = #{id}
+    </delete>
+
+    <!-- SkuSpecification getById(Long id); -->
+    <select id="getById" resultMap="StandardResultMap">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_sku_specification
+        where id = #{id}
+    </select>
+
+</mapper>

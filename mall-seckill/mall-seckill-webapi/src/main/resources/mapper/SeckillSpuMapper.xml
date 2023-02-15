@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mall.seckill.mapper.SeckillSpuMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.seckill.model.SeckillSpu">
+        <id column="id" property="id" />
+        <result column="spu_id" property="spuId" />
+        <result column="list_price" property="listPrice" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+
+    <!--  秒杀spu表的sql片段  -->
+    <sql id="SimpleFields">
+        <if test="true">
+            id,
+            spu_id,
+            list_price,
+            start_time,
+            end_time,
+            gmt_create,
+            gmt_modified
+        </if>
+    </sql>
+    <!--  查询秒杀商品列表的方法 -->
+    <select id="findSeckillSpus" resultMap="BaseResultMap">
+        select
+            <include refid="SimpleFields" />
+        from
+            seckill_spu
+    </select>
+
+    <!-- 根据给定时间,查询正在进行秒杀的商品  -->
+    <select id="findSeckillSpusByTime" resultMap="BaseResultMap">
+        select
+            <include refid="SimpleFields" />
+        from
+            seckill_spu
+        where
+            start_time &lt; #{time}
+        and
+            end_time &gt; #{time}
+    </select>
+
+    <!--  根据spuId查询秒杀spu信息 -->
+    <select id="findSeckillSpuById" resultMap="BaseResultMap">
+        select
+            <include refid="SimpleFields" />
+        from
+            seckill_spu
+        where
+            spu_id=#{spuId}
+    </select>
+
+    <!-- 查询秒杀表中所有商品的spuId,由于后面保存到布隆过滤器防止缓存穿透  -->
+    <!--                              ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  -->
+    <select id="findAllSeckillSpuIds" resultType="long">
+        select spu_id from seckill_spu
+    </select>
+
+
+
+
+</mapper>

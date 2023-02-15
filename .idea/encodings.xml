@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/mall-ams/mall-ams-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-ams/mall-ams-webapi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-ams/mall-ams-webapi/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-front/mall-front-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-front/mall-front-webapi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-front/mall-front-webapi/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-gateway-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-leaf/leaf-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-leaf/leaf-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-leaf/leaf-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-order/mall-order-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-order/mall-order-webapi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-pojo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-product/mall-product-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-product/mall-product-webapi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-product/mall-product-webapi/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-resource/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-resource/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-search/mall-search-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-search/mall-search-webapi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-seckill/mall-seckill-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-seckill/mall-seckill-webapi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-sso/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-sso/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-ums/mall-ums-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-ums/mall-ums-webapi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mall-ums/mall-ums-webapi/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
